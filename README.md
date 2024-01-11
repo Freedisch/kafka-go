@@ -42,7 +42,7 @@ The task is to build a web server in Go to handle incoming data and route it thr
    ```
 3. Use the Sarama library for Go. Install it using:
    ```bash
-   go get -u github.com/Shopify/sarama
+   go get -u github.com/IBM/sarama
    ```
 
 ## Notes and Considerations
@@ -73,14 +73,62 @@ Build a simple web server in Go that scales as it receives more requests. The se
 
 ## Implementation Details
 
-- Implement a single endpoint for the web server.
-- Utilize Goroutines to handle incoming requests concurrently.
-- Introduce sleep operations within the Goroutines to simulate compute-heavy tasks.
-- Monitor and scale Goroutines dynamically based on incoming request patterns.
+- Single endpoint `/process` for handling compute-heavy tasks.
+- Worker pool for efficient concurrency control.
+- Simulates client sending requests to the server.
+- Demonstrates basic scalability by adjusting the number of workers.
 
-## Notes and Considerations
+## Prerequisites
 
-- The scalability of the server should be tested under various load conditions.
-- Fine-tune the sleep interval to ensure realistic simulation of compute-heavy tasks.
+- Go installed on your machine.
 
----
+## Getting Started
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/freedisch/kafka-go.git
+   ```
+
+2. Change into the project directory:
+
+   ```bash
+   cd kafka-go
+   ```
+
+3. Run the server:
+
+   ```bash
+   go run main.go
+   ```
+
+   The server will start at http://localhost:8080.
+
+4. Simulate client requests:
+
+   Open a new terminal and run:
+
+   ```bash
+   go run client.go
+   ```
+
+   This will simulate multiple client requests to the server.
+
+## Configuration
+
+Adjust the `workerCount` variable in `main.go` to control the number of concurrent workers in the pool.
+
+```go
+var (
+	workerCount = 5
+)
+```
+
+## Contributing
+
+Feel free to contribute to this project by opening issues or submitting pull requests. Your feedback and contributions are welcome!
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
